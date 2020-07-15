@@ -12,7 +12,7 @@ defmodule Plateau do
     |> Enum.all?(fn i -> ceil(elem(position, i)) in get_range(plateau, i) end)
   end
 
-  defp get_range(plateau = %Plateau{}, i) do
+  defp get_range(plateau = %Plateau{}, i) when is_number(i) do
     0..elem(plateau.upper_rightmost_position, i)
   end
 end
