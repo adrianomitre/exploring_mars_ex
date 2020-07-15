@@ -47,14 +47,18 @@ defmodule ExploringMars do
     stream
     |> Stream.chunk_every(2)
     |> Stream.each(fn [first_line, second_line] ->
-      simulate_probe(plateau, first_line, second_line)
+      simulate_probe_and_report_final_position(plateau, first_line, second_line)
     end)
     |> Stream.run()
+  end
+
+  def simulate_probe_and_report_final_position(plateau, first_line, second_line) do
+    simulate_probe(plateau, first_line, second_line)
+    |> Reporter.report_current_position()
   end
 
   def simulate_probe(plateau, first_line, second_line) do
     MarsExploration.process_probe_definition(first_line, plateau)
     |> MarsExploration.process_probe_commands(second_line)
-    |> Reporter.report_current_position()
   end
 end

@@ -1,5 +1,5 @@
 defmodule Reporter do
-  def report_current_position(probe) do
+  def report_current_position(probe = %Probe{}) do
     pos_x = elem(probe.position, 0) |> round()
     pos_y = elem(probe.position, 1) |> round()
 
