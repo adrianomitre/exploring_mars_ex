@@ -25,7 +25,6 @@ defmodule Parser do
     String.split(line)
     |> Enum.take(2)
     |> Enum.map(&String.to_integer/1)
-    |> List.to_tuple()
   end
 
   def parse_direction(line) do

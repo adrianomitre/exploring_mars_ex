@@ -51,12 +51,16 @@ defmodule Probe do
   end
 
   def move_forward(probe, distance \\ 1) do
-    curr_pos = probe.position
-
-    next_pos = {
-      (elem(curr_pos, 0) + :math.cos(probe.direction) * distance) |> Float.round(),
-      (elem(curr_pos, 1) + :math.sin(probe.direction) * distance) |> Float.round()
-    }
+    next_pos =
+      probe.position
+      |> Enum.chunk_every(2)
+      |> Enum.flat_map(fn [x, y] ->
+        [
+          x + :math.cos(probe.direction) * distance,
+          y + :math.sin(probe.direction) * distance
+        ]
+      end)
+      |> Enum.map(&Float.round/1)
 
     %Probe{
       probe
@@ -68,7 +72,6 @@ defmodule Probe do
     def to_string(probe) do
       position =
         probe.position
-        |> Tuple.to_list()
         |> Enum.map(&round/1)
         |> Enum.join(" ")
 
