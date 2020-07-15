@@ -64,6 +64,19 @@ defmodule Probe do
     }
   end
 
+  defimpl String.Chars, for: Probe do
+    def to_string(probe) do
+      pos_x = elem(probe.position, 0) |> round()
+      pos_y = elem(probe.position, 1) |> round()
+
+      orientation_first_letter =
+        Probe.angle_to_orientation_first_letter()
+        |> Map.fetch!(probe.direction)
+
+      "#{pos_x} #{pos_y} #{orientation_first_letter}"
+    end
+  end
+
   # def valid_command?(command) do
   #   return true if command != :move_forward || @plateau.nil?
   #   @plateau.within_boundaries?(dup.move_forward)
