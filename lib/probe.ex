@@ -66,14 +66,17 @@ defmodule Probe do
 
   defimpl String.Chars, for: Probe do
     def to_string(probe) do
-      pos_x = elem(probe.position, 0) |> round()
-      pos_y = elem(probe.position, 1) |> round()
+      position =
+        probe.position
+        |> Tuple.to_list()
+        |> Enum.map(&round/1)
+        |> Enum.join(" ")
 
       orientation_first_letter =
         Probe.angle_to_orientation_first_letter()
         |> Map.fetch!(probe.direction)
 
-      "#{pos_x} #{pos_y} #{orientation_first_letter}"
+      "#{position} #{orientation_first_letter}"
     end
   end
 
