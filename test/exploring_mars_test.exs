@@ -5,17 +5,17 @@ defmodule ExploringMarsTest do
   doctest ExploringMars
 
   @sample_input """
-                5 5
-                1 2 N
-                LMLMLMLMM
-                3 3 E
-                MMRMMRMRRM
-                """
+  5 5
+  1 2 N
+  LMLMLMLMM
+  3 3 E
+  MMRMMRMRRM
+  """
 
   @sample_output """
-                 1 3 N
-                 5 1 E
-                 """
+  1 3 N
+  5 1 E
+  """
 
   test "sample input and output" do
     {:ok, pid} = StringIO.open(@sample_input)
