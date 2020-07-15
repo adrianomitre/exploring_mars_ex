@@ -54,7 +54,7 @@ defmodule ExploringMars do
   end
 
   def simulate_probe(plateau, first_line, second_line) do
-    MarsExploration.process_probe_definition(first_line, plateau)
-    |> MarsExploration.process_probe_commands(second_line)
+    MarsExploration.parse_probe(first_line, plateau)
+    |> MarsExploration.applying_commands(Parser.parse_commands(second_line))
   end
 end

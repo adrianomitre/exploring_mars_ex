@@ -9,7 +9,7 @@ defmodule MarsExploration do
     }
   end
 
-  def process_probe_definition(line, plateau) do
+  def parse_probe(line, plateau) do
     %Probe{
       plateau: plateau,
       position: Parser.parse_position(line),
@@ -17,8 +17,8 @@ defmodule MarsExploration do
     }
   end
 
-  def process_probe_commands(probe, line) do
-    Parser.parse_commands(line)
+  def applying_commands(probe, commands) do
+    commands
     |> Enum.reduce(probe, fn command_to_apply, updated_probe ->
       # unless @probe.valid_command?(cmd)
       #   raise(ArgumentError, "Invalid command #{cmd}, skipping probe")
