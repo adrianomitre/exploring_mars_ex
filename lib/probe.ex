@@ -83,10 +83,13 @@ defmodule Probe do
     end
   end
 
-  # def valid_command?(command) do
-  #   return true if command != :move_forward || @plateau.nil?
-  #   @plateau.within_boundaries?(dup.move_forward)
-  # end
+  def valid_command?(probe, command) do
+    if probe.plateau != nil and command == :move_forward do
+      Plateau.within_boundaries?(probe.plateau, move_forward(probe).position |> List.to_tuple())
+    else
+      true
+    end
+  end
 
   defp turn(probe, degrees) do
     next_dir = rem_float(probe.direction - degrees, 2 * :math.pi())
