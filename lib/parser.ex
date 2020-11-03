@@ -50,6 +50,7 @@ defmodule Parser do
     unless String.match?(line, ~r/^\s*\d+\s\d+(?:\s+[ENWS])?\s*$/) do
       raise "Invalid syntax for position with optional direction"
     end
+
     true
   end
 end
